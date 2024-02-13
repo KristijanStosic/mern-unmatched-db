@@ -76,7 +76,7 @@ const getCharacterById = async (req, res) => {
 // @route   POST /api/characters
 // @access  Private
 const createCharacter = async (req, res) => {
-  const { characterImage, name, back, miniatures, description, ability, guides, set, deck, lore, health, attack, movement, sidekick, sidekickMovement, sidekickHealth, sidekickAttack, numberOfSidekicks, numberOfHeroes } = req.body;
+  const { characterImage, name, back, miniatures, description, specialAbility, abilityEffect, guides, set, deck, lore, health, attack, movement, sidekick, sidekickMovement, sidekickHealth, sidekickAttack, numberOfSidekicks, numberOfHeroes } = req.body;
 
   const character = await Character.create({
     characterImage,
@@ -84,7 +84,8 @@ const createCharacter = async (req, res) => {
     back,
     miniatures,
     description,
-    ability,
+    specialAbiliy,
+    abilityEffect,
     guides,
     set,
     deck,
@@ -114,7 +115,7 @@ const createCharacter = async (req, res) => {
 // @route   PUT /api/characters/:id
 // @access  Private/Admin
 const updateCharacter = async (req, res) => {
-  const { characterImage, name, back, miniatures, description, ability, guides, set, deck, lore, health, attack, movement, sidekick, sidekickMovement, sidekickHealth, sidekickAttack, numberOfSidekicks, numberOfHeroes } = req.body;
+  const { characterImage, name, back, miniatures, description, specialAbility, abilityEffect, guides, set, deck, lore, health, attack, movement, sidekick, sidekickMovement, sidekickHealth, sidekickAttack, numberOfSidekicks, numberOfHeroes } = req.body;
 
   const character = await Character.findById(req.params.id);
 
@@ -124,7 +125,8 @@ const updateCharacter = async (req, res) => {
     character.back = back || character.back;
     character.miniatures = miniatures || character.miniatures;
     character.description = description || character.description;
-    character.ability = ability || character.ability;
+    character.specialAbility = specialAbility || character.specialAbility;
+    character.abilityEffect = abilityEffect || character.abilityEffect;
     character.guides = guides || character.guides;
     character.set = set || character.set;
     character.deck = deck || character.deck;

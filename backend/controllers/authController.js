@@ -45,7 +45,7 @@ const register = async (req, res) => {
 
     if (userExists) {
         res.status(409);
-        throw new Error('User already exists');
+        throw new Error('Invalid email or password');
     }
 
     const user = await User.create({

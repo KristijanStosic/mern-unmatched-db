@@ -18,24 +18,18 @@ const characterSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    miniatures: [
-        {
-            image1: {
-                type: String,
-            },
-            image2: {
-                type: String,
-            },
-            image3: {
-                type: String,
-            },
-        }
-    ],
+    miniatures: {
+        type: [String],
+        required: true
+    },
     description: {
         type: String,
         required: true
     },
-    ability: {
+    specialAbility: {
+        type: String,
+    },
+    abilityEffect: {
         type: String,
         required: true
     },
