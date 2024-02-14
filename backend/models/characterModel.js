@@ -46,14 +46,9 @@ const characterSchema = new mongoose.Schema({
         }
     ],
     set: {
-        name: {
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Set'
     },
     deck: {
         type: String,

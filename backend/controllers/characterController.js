@@ -45,7 +45,7 @@ const getCharacters = async (req, res) => {
   const filteredQuery = JSON.parse(queryStr);
 
   const count = await Character.countDocuments(filteredQuery);
-  const characters = await Character.find(filteredQuery)
+  const characters = await Character.find(filteredQuery).populate('set')
     .sort(sortOptions)
     .limit(limit)
     .skip(skip);

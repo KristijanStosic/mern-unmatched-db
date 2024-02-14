@@ -40,8 +40,13 @@ export default function Header() {
                         </Link>
                     </Button>
                     <Button size="sm" variant="ghost" asChild>
-                        <Link to="/maps">
-                            Maps
+                        <Link to="/boards">
+                            Boards
+                        </Link>
+                    </Button>
+                    <Button size="sm" variant="ghost" asChild>
+                        <Link to="/sets">
+                            Sets
                         </Link>
                     </Button>
                 </div>

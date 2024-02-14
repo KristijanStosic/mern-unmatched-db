@@ -24,10 +24,7 @@ const characters = [
         url: "https://www.youtube.com/watch?v=H0U3-QYjwVM"
       }
     ],
-    set: {
-      name: "Battle of Legends, Volume One",
-      url: "https://boardgamegeek.com/boardgame/274637/unmatched-battle-legends-volume-one"
-    },
+    set: "65ccfc79a7820a01f4f57e5a",
     deck: 'https://unmatched.cards/umdb/decks/medusa',
     lore: 'https://en.wikipedia.org/wiki/Medusa',
     health: 16,
@@ -64,10 +61,7 @@ const characters = [
         name: "Lord of the Board",
         url: "https://www.youtube.com/watch?v=Z_z-xlByMRA"
       }],
-    set: {
-      name: "Battle of Legends, Volume One",
-      url: "https://boardgamegeek.com/boardgame/274637/unmatched-battle-legends-volume-one"
-    },
+    set: "65ccfc79a7820a01f4f57e5a",
     deck: 'https://unmatched.cards/umdb/decks/sinbad',
     lore: 'https://en.wikipedia.org/wiki/Sinbad_the_Sailor',
     health: 15,
@@ -104,10 +98,7 @@ const characters = [
         name: "Lord of the Board",
         url: "https://www.youtube.com/watch?v=GOVtdPRfBEg"
       }],
-    set: {
-      name: "Battle of Legends, Volume One",
-      url: "https://boardgamegeek.com/boardgame/274637/unmatched-battle-legends-volume-one"
-    },
+    set: "65ccfc79a7820a01f4f57e5a",
     deck: 'https://unmatched.cards/umdb/decks/alice',
     lore: 'https://en.wikipedia.org/wiki/Alice_(Alice%27s_Adventures_in_Wonderland)',
     health: 13,
@@ -144,10 +135,7 @@ const characters = [
         name: "Lord of the Board",
         url: "https://www.youtube.com/watch?v=8Wd_OIFdYXk"
       }],
-    set: {
-      name: "Battle of Legends, Volume One",
-      url: "https://boardgamegeek.com/boardgame/274637/unmatched-battle-legends-volume-one"
-    },
+    set: "65ccfc79a7820a01f4f57e5a",
     deck: 'https://unmatched.cards/umdb/decks/king-arthur',
     lore: 'https://en.wikipedia.org/wiki/King_Arthur',
     health: 18,
@@ -184,10 +172,7 @@ const characters = [
         url: "https://www.youtube.com/watch?v=ZnmSTcz1v9A"
       },
     ],
-    set: {
-      name: "Jurassic Park - Ingen vs. Raptors",
-      url: "https://boardgamegeek.com/boardgame/284777/unmatched-jurassic-park-ingen-vs-raptors"
-    },
+    set: "65ccfc79a7820a01f4f57e5a",
     deck: 'https://unmatched.cards/umdb/decks/raptors',
     lore: 'https://en.wikipedia.org/wiki/Dinosaurs_in_Jurassic_Park#Velociraptor',
     health: 7,

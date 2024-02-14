@@ -9,6 +9,8 @@ import connectDB from './config/db.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import characterRoutes from './routes/characterRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import boardRoutes from './routes/boardRoutes.js'
+import setRoutes from './routes/setRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import myFavoriteRoutes from './routes/myFavoriteRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
@@ -36,6 +38,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/characters', characterRoutes)
+app.use('/api/boards', boardRoutes)
+app.use('/api/sets', setRoutes)
 app.use('/api/favorites', myFavoriteRoutes)
 app.use('/api/upload', uploadRoutes)
 
