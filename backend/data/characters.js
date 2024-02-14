@@ -24,7 +24,7 @@ const characters = [
         url: "https://www.youtube.com/watch?v=H0U3-QYjwVM"
       }
     ],
-    set: "65ccfc79a7820a01f4f57e5a",
+    set: "65cd0d898d2812b51a9a0d05",
     deck: 'https://unmatched.cards/umdb/decks/medusa',
     lore: 'https://en.wikipedia.org/wiki/Medusa',
     health: 16,
@@ -61,7 +61,7 @@ const characters = [
         name: "Lord of the Board",
         url: "https://www.youtube.com/watch?v=Z_z-xlByMRA"
       }],
-    set: "65ccfc79a7820a01f4f57e5a",
+    set: "65cd0d898d2812b51a9a0d05",
     deck: 'https://unmatched.cards/umdb/decks/sinbad',
     lore: 'https://en.wikipedia.org/wiki/Sinbad_the_Sailor',
     health: 15,
@@ -98,7 +98,7 @@ const characters = [
         name: "Lord of the Board",
         url: "https://www.youtube.com/watch?v=GOVtdPRfBEg"
       }],
-    set: "65ccfc79a7820a01f4f57e5a",
+    set: "65cd0d898d2812b51a9a0d05",
     deck: 'https://unmatched.cards/umdb/decks/alice',
     lore: 'https://en.wikipedia.org/wiki/Alice_(Alice%27s_Adventures_in_Wonderland)',
     health: 13,
@@ -135,7 +135,7 @@ const characters = [
         name: "Lord of the Board",
         url: "https://www.youtube.com/watch?v=8Wd_OIFdYXk"
       }],
-    set: "65ccfc79a7820a01f4f57e5a",
+    set: "65cd0d898d2812b51a9a0d05",
     deck: 'https://unmatched.cards/umdb/decks/king-arthur',
     lore: 'https://en.wikipedia.org/wiki/King_Arthur',
     health: 18,
@@ -179,6 +179,111 @@ const characters = [
     attack: "Melee",
     movement: 3,
     numberOfHeroes: 3,
+  },
+  {
+    _id: "65cd0e494667ded752fe9aaf",
+    characterImage: "/uploads/ingen.jpg",
+    name: "InGen",
+    back: "https://i.imgur.com/qWqgGXW.png",
+    miniatures: [
+      "https://i.imgur.com/5IzpjrJ.png",
+    ],
+    description: "Robert Muldoon is a ranged fighter, supported by 3 ranged ingen workers. They can slow their opponent down and damage them by placing traps on the board.",
+    specialAbility: "",
+    abilityEffect: "At the start of your turn, you may place a trap. Whenever one of your traps is returned to the box, draw a card. Muldoon starts with 8 traps.",
+    guides: [
+      {
+        name: "Baked Goods",
+        url: "https://www.youtube.com/watch?v=hjcUhfmne8c"
+      },
+      {
+        name: "To The Table Top!",
+        url: "https://www.youtube.com/watch?v=ZGxNQn7P-to"
+      },
+    ],
+    set: "65ccfc79a7820a01f4f57e5a",
+    deck: 'https://unmatched.cards/umdb/decks/ingen',
+    lore: 'https://en.wikipedia.org/wiki/List_of_Jurassic_Park_characters#Robert_Muldoon',
+    health: 14,
+    attack: "Ranged",
+    movement: 3,
+    numberOfHeroes: 1,
+    numberOfSidekicks: 3,
+    sidekick: "InGen Workers",
+    sidekickHealth: 1,
+    sidekickMovement: 3,
+    sidekickAttack: "Ranged"
+  },
+  {
+    _id: "65cd10505ace60f53c049660",
+    characterImage: "/uploads/houdini.jpg",
+    name: "Harry Houdini",
+    back: "https://i.imgur.com/pQmwZa1.png",
+    miniatures: [
+      "https://i.imgur.com/KjK1FZE.png",
+    ],
+    description: "Houdini and his sidekick Bess are melee characters. When Houdini boosts his maneuver, he can move to any space on the board. Some of his cards have an ability attached to their boost value, which triggers when used as a boost.",
+    specialAbility: "ESCAPE ARTIST",
+    abilityEffect: "When you take the maneuver action and BOOST, you may place Houdini in any space instead of moving. (Bess moves as normal)",
+    guides: [
+      {
+        name: "Baked Goods",
+        url: "https://www.youtube.com/watch?v=UAM84ZlFD4A"
+      },
+      {
+        name: "To The Table Top!",
+        url: "https://www.youtube.com/watch?v=nexf5onWJeI"
+      },
+      {
+        name: "Lord of the Board",
+        url: "https://www.youtube.com/watch?v=i47pLhncBlc&t=546s"
+      },
+    ],
+    set: "65cd100db4e7707b8466732b",
+    deck: 'https://unmatched.cards/umdb/decks/harry-houdini',
+    lore: 'https://en.wikipedia.org/wiki/Harry_Houdini',
+    health: 14,
+    attack: "Melee",
+    movement: 2,
+    numberOfHeroes: 1,
+    numberOfSidekicks: 1,
+    sidekick: "Bess",
+    sidekickHealth: 5,
+    sidekickMovement: 2,
+    sidekickAttack: "Melee"
+  },
+  {
+    _id: "65cd1156b922624e4560dfc4",
+    characterImage: "/uploads/genie.jpg",
+    name: "The Genie",
+    back: "https://i.imgur.com/2HvORti.png",
+    miniatures: [
+      "https://i.imgur.com/pVJ8vc7.png",
+    ],
+    description: "The Genie is a ranged fighter who deals more damage when adjacent to the opponent. He can draw a lot of cards and discard them to play more actions.",
+    specialAbility: "INFINITE POWER",
+    abilityEffect: "At the start of your turn, you may discard 1 card to gain 1 action.",
+    guides: [
+      {
+        name: "Baked Goods",
+        url: "https://www.youtube.com/watch?v=eA2MfPV0wp0"
+      },
+      {
+        name: "To The Table Top!",
+        url: "https://www.youtube.com/watch?v=enaUsIlGbjU"
+      },
+      {
+        name: "Lord of the Board",
+        url: "https://www.youtube.com/watch?v=i47pLhncBlc&t=96s"
+      },
+    ],
+    set: "65cd100db4e7707b8466732b",
+    deck: 'https://unmatched.cards/umdb/decks/the-genie',
+    lore: 'https://en.wikipedia.org/wiki/Genies_in_popular_culture',
+    health: 16,
+    attack: "Ranged",
+    movement: 3,
+    numberOfHeroes: 1,
   },
 ];
 

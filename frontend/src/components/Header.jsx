@@ -34,17 +34,17 @@ export default function Header() {
                     <Logo />
                 </div>
                 <div>
-                    <Button size="sm" variant="ghost" asChild>
+                    <Button variant="ghost" asChild>
                         <Link to="/">
                             Characters
                         </Link>
                     </Button>
-                    <Button size="sm" variant="ghost" asChild>
+                    <Button variant="ghost" asChild>
                         <Link to="/boards">
                             Boards
                         </Link>
                     </Button>
-                    <Button size="sm" variant="ghost" asChild>
+                    <Button variant="ghost" asChild>
                         <Link to="/sets">
                             Sets
                         </Link>

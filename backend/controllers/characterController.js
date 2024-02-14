@@ -4,7 +4,7 @@ import Character from "../models/characterModel.js";
 // @route   GET /api/characters
 // @access  Public
 const getCharacters = async (req, res) => {
-  const pageSize = 8;
+  const pageSize = 6;
   const page = Number(req.query.page) || 1;
   const limit = pageSize;
   const skip = (page - 1) * pageSize;
@@ -27,18 +27,24 @@ const getCharacters = async (req, res) => {
     sortOptions = '-createdAt';
   }
 
-  const selectedNames = req.query.filterBy ? req.query.filterBy.split(',') : [];
+  const selectedNames = req.query.filterByName ? req.query.filterByName.split(',') : [];
+  const selectedSets = req.query.filterBySets ? req.query.filterBySets.split(',') : [];
 
   const nameFilters = [];
+  const setFilters = [];
 
   if (selectedNames.length > 0) {
     nameFilters.push({ name: { $in: selectedNames } });
   }
 
-  const removeFields = ['keyword', 'limit', 'page', 'sort', 'filterBy'];
+  if (selectedSets.length > 0) {
+    setFilters.push({ set: { $in: selectedSets } });
+  }
+
+  const removeFields = ['keyword', 'limit', 'page', 'sort', 'filterByName', 'filterBySets'];
   removeFields.forEach((el) => delete req.query[el]);
 
-  const filters = [{ ...keyword }, ...nameFilters, { ...req.query }];
+  const filters = [{ ...keyword }, ...nameFilters, ...setFilters, { ...req.query }];
 
   let queryStr = JSON.stringify({ $and: filters });
 
