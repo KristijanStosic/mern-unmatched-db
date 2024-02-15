@@ -15,7 +15,7 @@ const getMyFavoriteCharacters = async (req, res) => {
 
     const myFavoriteCharacters = await MyFavoriteCharacter.findOne({ user: userId }).populate('characters');
 
-    if (!myFavoriteCharacters?.length) {
+    if (!myFavoriteCharacters) {
         res.status(404);
         throw new Error('My favorite characters list not found for given user');
     }
@@ -54,14 +54,14 @@ const addToFavorites = async (req, res) => {
     }
 
     if (myFavoriteCharacters.characters.includes(characterId)) {
-        res.status(401);
-        throw new Error('Character is already in favorites list');
+        res.status(400);
+        throw new Error(`${character.name} is already in favorites list`);
     }
 
     myFavoriteCharacters.characters.push(req.params.characterId);
 
     await myFavoriteCharacters.save();
-    res.status(200).json({ message: 'Character added to my favourites' });
+    res.status(201).json({ message: `${character.name} added to my favourites` });
 };
 
 // @desc Remove From Favorites
@@ -70,23 +70,24 @@ const addToFavorites = async (req, res) => {
 const removeFromFavorites = async (req, res) => {
     const userId = req.user._id;
     const characterId = req.params.characterId;
+    const character = await Character.findById(characterId);
 
     const myFavoriteCharacters = await MyFavoriteCharacter.findOne({ user: userId });
 
-    if (!myFavoriteCharacters?.length) {
+    if (!myFavoriteCharacters) {
         res.status(404);
         throw new Error('My favorite characters list not found for given user');
     }
 
     if (!myFavoriteCharacters.characters.includes(characterId)) {
         res.status(400);
-        throw new Error('Character not found in my favorites characters list');
+        throw new Error(`${character.name} not found in my favorites characters list`);
     }
 
     myFavoriteCharacters.characters = myFavoriteCharacters.characters.filter(charId => charId.toString() !== characterId);
 
     await myFavoriteCharacters.save();
-    res.status(200).json({ message: 'Character removed from my favorites' });
+    res.status(200).json({ message: `${character.name} removed from my favorite list` });
 };
 
 export { addToFavorites, removeFromFavorites, getMyFavoriteCharacters };
