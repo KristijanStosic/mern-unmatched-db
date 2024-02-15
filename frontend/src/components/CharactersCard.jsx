@@ -1,5 +1,4 @@
-import { useDispatch } from "react-redux";
-import meleeAttack from '../assets/melee.svg'
+import meleeAttack from '../assets/melee.svg';
 import { Heart } from "lucide-react";
 
 import { Link } from "react-router-dom";
@@ -13,19 +12,29 @@ import {
     CardTitle,
 } from "./ui/card.jsx";
 
+import { useAddCharacterToFavoriteMutation, useGetMyFavoriteCharactersQuery, useRemoveCharacterFromFavoriteMutation } from "@/redux/slices/myFavoritesApiSlice.js";
+
 import CharacterCarousel from "./CharacterCarousel.jsx";
+import { useToast } from "./ui/use-toast.js";
 
 export default function CharactersGrid({ character }) {
-    const dispatch = useDispatch();
+    const { toast } = useToast();
 
-    const addToFavoriteHandler = () => {
+    const [addCharacterToFavorite, { isLoading }] = useAddCharacterToFavoriteMutation();
 
+    async function addToFavoriteHandler(characterId) {
+        try {
+            const response = await addCharacterToFavorite(characterId).unwrap();
+            toast({ variant: 'success', title: response.message });
+        } catch (error) {
+            toast({ variant: 'destructive', title: "Uh oh! Something went wrong.", description: error?.data?.message || error?.error });
+        }
     };
 
     return (
         <Card className="h-full flex flex-col bg-slate-50 border-[1.5px] border-slate-700">
             <CardHeader>
-                <CardTitle>{character.name}</CardTitle>  
+                <CardTitle>{character.name}</CardTitle>
             </CardHeader>
 
             <hr className="border-1 border-slate-700" />
@@ -89,7 +98,11 @@ export default function CharactersGrid({ character }) {
                 <Button asChild>
                     <Link to={`/character/${character._id}`}>View More Details</Link>
                 </Button>
-                <Heart />
+                <Heart
+                    className='cursor-pointer'
+                    disabled={isLoading}
+                    onClick={() => addToFavoriteHandler(character._id)} /
+                >
             </CardFooter>
         </Card>
     );

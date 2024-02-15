@@ -15,10 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form.jsx";
 import { Input } from "@/components/ui/input.jsx";
+import { Eye, EyeOff } from "lucide-react";
 
 import Container from "@/components/Container.jsx";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/redux/slices/authApiSlice.js";
@@ -36,6 +37,8 @@ const loginUserSchema = z.object({
 });
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(loginUserSchema),
     defaultValues: {
@@ -74,6 +77,10 @@ export default function Login() {
     }
   }, [navigate, redirect, user]);
 
+  function togglePassword() {
+    setShowPassword((prevState) => !prevState);
+  }
+
   return (
     <Container>
       <div className="flex items-center justify-center">
@@ -109,8 +116,20 @@ export default function Login() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" disabled={isLoading} {...field} />
+                        <div className="relative">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            disabled={isLoading}
+                            {...field}
+                          />
+                          <span
+                            onClick={togglePassword}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer">
+                            {showPassword ? <Eye /> : <EyeOff />}
+                          </span>
+                        </div>
                       </FormControl>
+
                       <FormMessage />
                     </FormItem>
                   )}

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from './ui/input.jsx';
 import { Button } from './ui/button.jsx';
 
-const CharacterSearch = ({ isAdmin = false }) => {
+const CharacterSearch = () => {
   const navigate = useNavigate();
   const { keyword: urlKeyword } = useParams();
 
@@ -22,20 +22,23 @@ const CharacterSearch = ({ isAdmin = false }) => {
   };
 
   return (
-    <div className='inline-flex relative'>
-      <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler}>
+      <div className='relative'>
         <Input
           onChange={(e) => setKeyword(e.target.value)}
           type="text"
           placeholder="Search characters..."
           className="w-[200px]"
         />
-        <Button variant='link' type="button" className="absolute right-[0.1px] top-1/2 transform -translate-y-1/2">
-          <Search className='text-slate-700' />
+        <Button
+          variant='link'
+          type="submit"
+          className="absolute right-[0.1px] top-1/2 transform -translate-y-1/2 text-gray-500 z-10"
+        >
+          <Search />
         </Button>
-      </form>
-    </div>
-
+      </div>
+    </form>
   );
 };
 
