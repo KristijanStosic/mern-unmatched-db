@@ -1,5 +1,4 @@
-import meleeAttack from '../assets/melee.svg';
-import { Heart } from "lucide-react";
+import { Heart, Trash } from "lucide-react";
 
 import { Link } from "react-router-dom";
 
@@ -12,32 +11,53 @@ import {
     CardTitle,
 } from "./ui/card.jsx";
 
-import { useAddCharacterToFavoriteMutation, useGetMyFavoriteCharactersQuery, useRemoveCharacterFromFavoriteMutation } from "@/redux/slices/myFavoritesApiSlice.js";
+import {
+    useAddCharacterToFavoriteMutation,
+    useGetMyFavoriteCharactersQuery,
+    useRemoveCharacterFromFavoriteMutation
+} from "@/redux/slices/myFavoritesApiSlice.js";
 
 import CharacterCarousel from "./CharacterCarousel.jsx";
 import { useToast } from "./ui/use-toast.js";
+import { useSelector } from 'react-redux';
+import Tooltips from './Tooltips.jsx';
 
 export default function CharactersGrid({ character }) {
+    const { user } = useSelector((state) => state.auth);
+
+    const { data: myFavoriteCharacters } = useGetMyFavoriteCharactersQuery();
+    const isCharacterFavorite = user ? myFavoriteCharacters?.some((favChar) => favChar._id === character._id) : false;
+
     const { toast } = useToast();
 
-    const [addCharacterToFavorite, { isLoading }] = useAddCharacterToFavoriteMutation();
+    const [addCharacterToFavorite, { isLoading: isLoadingAddCharacter }] = useAddCharacterToFavoriteMutation();
+    const [removeCharacterFromFavorite, { isLoading: isLoadingRemoveCharacter }] = useRemoveCharacterFromFavoriteMutation();
 
     async function addToFavoriteHandler(characterId) {
         try {
             const response = await addCharacterToFavorite(characterId).unwrap();
             toast({ variant: 'success', title: response.message });
         } catch (error) {
-            toast({ variant: 'destructive', title: "Uh oh! Something went wrong.", description: error?.data?.message || error?.error });
+            toast({ variant: 'destructive', description: error?.data?.message || error?.error });
+        }
+    };
+
+    async function removeFromFavoriteHandler(characterId) {
+        try {
+            const response = await removeCharacterFromFavorite(characterId).unwrap();
+            toast({ variant: 'info', title: response.message });
+        } catch (error) {
+            toast({ variant: 'destructive', description: error?.data?.message || error?.error });
         }
     };
 
     return (
-        <Card className="h-full flex flex-col bg-slate-50 border-[1.5px] border-slate-700">
+        <Card className="h-full flex flex-col bg-primary-foreground border-[1.5px] border-primary">
             <CardHeader>
                 <CardTitle>{character.name}</CardTitle>
             </CardHeader>
 
-            <hr className="border-1 border-slate-700" />
+            <hr className="border-1 border-primary" />
 
             <CardContent className="flex-1">
                 <div className="flex mt-3">
@@ -62,7 +82,7 @@ export default function CharactersGrid({ character }) {
                 </div>
 
                 <div className="flex gap-2 mt-2">
-                    <strong className="text-stone-700">Strategy guide(s): </strong>
+                    <strong className="text-primary">Strategy guide(s): </strong>
                     <div className="flex gap-3 underline">
                         <Link to={character?.guides[0]?.url}>
                             {character?.guides[0]?.name},
@@ -76,19 +96,19 @@ export default function CharactersGrid({ character }) {
                     </div>
                 </div>
                 <div>
-                    <strong className="text-stone-700">Set: </strong>
+                    <strong className="text-primary">Set: </strong>
                     <Link className="underline" to={character.set.url}>
                         {character.set.name}
                     </Link>
                 </div>
                 <div className="flex gap-3">
-                    <strong className="text-stone-700">Deck Details: </strong>
+                    <strong className="text-primary">Deck Details: </strong>
                     <Link className="underline" to={character.deck}>
                         Unmatched Database
                     </Link>
                 </div>
                 <div className="flex gap-3">
-                    <strong className="text-stone-700">History: </strong>
+                    <strong className="text-primary">History: </strong>
                     <Link className="underline" to={character.lore}>
                         Wikipedia
                     </Link>
@@ -98,11 +118,23 @@ export default function CharactersGrid({ character }) {
                 <Button asChild>
                     <Link to={`/character/${character._id}`}>View More Details</Link>
                 </Button>
-                <Heart
-                    className='cursor-pointer'
-                    disabled={isLoading}
-                    onClick={() => addToFavoriteHandler(character._id)} /
-                >
+                {user && isCharacterFavorite ? (
+                    <Tooltips tooltipText='Remove character from favorites'>
+                        <Trash
+                            className='cursor-pointer'
+                            disabled={isLoadingRemoveCharacter}
+                            onClick={() => removeFromFavoriteHandler(character._id)} /
+                        >
+                    </Tooltips>
+                ) : (
+                    <Tooltips tooltipText='Add character to favorites'>
+                        <Heart
+                            className='cursor-pointer'
+                            disabled={isLoadingAddCharacter}
+                            onClick={() => addToFavoriteHandler(character._id)} /
+                        >
+                    </Tooltips>
+                )}
             </CardFooter>
         </Card>
     );

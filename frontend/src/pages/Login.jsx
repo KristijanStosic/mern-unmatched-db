@@ -124,7 +124,7 @@ export default function Login() {
                           />
                           <span
                             onClick={togglePassword}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer">
+                            className="text-primary absolute right-3 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer hover:text-gray-700">
                             {showPassword ? <Eye /> : <EyeOff />}
                           </span>
                         </div>

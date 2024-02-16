@@ -5,6 +5,10 @@ import { useLogoutMutation } from "@/redux/slices/authApiSlice.js";
 import { logout } from "@/redux/slices/authSlice.js";
 import { useToast } from "./ui/use-toast.js";
 import Logo from "./Logo.jsx";
+import { Heart } from "lucide-react";
+import Tooltips from "./Tooltips.jsx";
+import { useGetMyFavoriteCharactersQuery } from "@/redux/slices/myFavoritesApiSlice.js";
+import { Badge } from "./ui/badge.jsx";
 
 export default function Header() {
     const { user } = useSelector((state) => state.auth);
@@ -13,6 +17,8 @@ export default function Header() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { data: myFavoriteCharacters, isLoading, error } = useGetMyFavoriteCharactersQuery();
 
     const [logoutApiCall] = useLogoutMutation();
 
@@ -34,31 +40,36 @@ export default function Header() {
                     <Logo />
                 </div>
                 <div>
-                    <Button variant="ghost" asChild>
+                    <Button variant="link" asChild>
                         <Link to="/">
                             Characters
                         </Link>
                     </Button>
-                    <Button variant="ghost" asChild>
+                    <Button variant="link" asChild>
                         <Link to="/boards">
                             Boards
                         </Link>
                     </Button>
-                    <Button variant="ghost" asChild>
+                    <Button variant="link" asChild>
                         <Link to="/sets">
                             Sets
+                        </Link>
+                    </Button>
+                    <Button variant="link" asChild>
+                        <Link to="/about">
+                            About
                         </Link>
                     </Button>
                 </div>
                 <div className="space-x-4 md:block md:w-auto flex items-center justify-between w-full">
                     {!user ? (
                         <>
-                            <Button size="sm" variant="outline" asChild>
+                            <Button size="sm" variant="link" asChild>
                                 <Link to="/login">
                                     Login
                                 </Link>
                             </Button>
-                            <Button size="sm" asChild>
+                            <Button size="sm" variant='link' asChild>
                                 <Link to="/register">
                                     Register
                                 </Link>
@@ -67,7 +78,27 @@ export default function Header() {
                     ) : (
                         <>
                             <div className="flex gap-4 justify-center items-center">
-                                {user.firstName} {user.lastName}
+                                <Button size="sm" variant="link" asChild>
+                                    <Link to="/my-favorite-characters">
+                                        <Tooltips tooltipText='My Favorite Characters'>
+                                            <div className="relative">
+                                                <Heart />
+                                                <div className="absolute -top-3.5 right-3.5">
+                                                    {myFavoriteCharacters?.length > 0 && (
+                                                        <Badge className="px-2">
+                                                            {myFavoriteCharacters.length}
+                                                        </Badge>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </Tooltips>
+                                    </Link>
+                                </Button>
+                                <Button size="sm" variant='link' asChild>
+                                    <Link to="/my-profile">
+                                        {user.firstName} {user.lastName}
+                                    </Link>
+                                </Button>
                                 <Button variant='ghost' size="sm" onClick={handleLogout}>
                                     Logout
                                 </Button>

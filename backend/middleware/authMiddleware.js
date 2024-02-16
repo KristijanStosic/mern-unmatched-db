@@ -22,7 +22,7 @@ const protect = async (req, res, next) => {
         }
     } else {
         res.status(401)
-        throw new Error('Please login')
+        throw new Error('Please login to complete further actions')
     }
 }
 

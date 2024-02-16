@@ -27,31 +27,18 @@ const getCharacters = async (req, res) => {
     sortOptions = '-createdAt';
   }
 
-  const selectedNames = req.query.filterByName ? req.query.filterByName.split(',') : [];
-  const selectedSets = req.query.filterBySets ? req.query.filterBySets.split(',') : [];
-
-  const nameFilters = [];
-  const setFilters = [];
-
-  if (selectedNames.length > 0) {
-    nameFilters.push({ name: { $in: selectedNames } });
-  }
-
-  if (selectedSets.length > 0) {
-    setFilters.push({ set: { $in: selectedSets } });
-  }
-
-  const removeFields = ['keyword', 'limit', 'page', 'sort', 'filterByName', 'filterBySets'];
+  // Removing fields from the query
+  const removeFields = ['keyword', 'limit', 'page', 'sort'];
   removeFields.forEach((el) => delete req.query[el]);
 
-  const filters = [{ ...keyword }, ...nameFilters, ...setFilters, { ...req.query }];
-
-  let queryStr = JSON.stringify({ $and: filters });
+  // Advance filter for price, ratings
+  let queryStr = JSON.stringify(req.query);
+  queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`);
 
   const filteredQuery = JSON.parse(queryStr);
 
-  const count = await Character.countDocuments(filteredQuery);
-  const characters = await Character.find(filteredQuery).populate('set')
+  const count = await Character.countDocuments({ ...keyword, ...filteredQuery });
+  const characters = await Character.find({ ...keyword, ...filteredQuery }).populate('set')
     .sort(sortOptions)
     .limit(limit)
     .skip(skip);
