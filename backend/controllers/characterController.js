@@ -4,7 +4,7 @@ import Character from "../models/characterModel.js";
 // @route   GET /api/characters
 // @access  Public
 const getCharacters = async (req, res) => {
-  const pageSize = 6;
+  const pageSize = 4;
   const page = Number(req.query.page) || 1;
   const limit = pageSize;
   const skip = (page - 1) * pageSize;

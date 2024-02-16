@@ -7,26 +7,21 @@ import Container from "@/components/Container.jsx";
 import Loading from "@/components/Loading.jsx";
 import CharacterSearch from "@/components/CharacterSearch.jsx";
 import CharacterSort from "@/components/CharacterSort.jsx";
-import { Pagination } from "@mui/material";
+import Paginate from "@/components/Paginate.jsx";
 
 export default function Characters() {
     const [sort, setSort] = useState('name');
-    const [pageNumber, setPageNumber] = useState(1);
 
     const { keyword, page } = useParams();
 
-    const { data, isLoading, isFetching, error } = useGetCharactersQuery({ 
-        keyword, 
-        page: pageNumber, 
-        sort 
+    const { data, isLoading, isFetching, error } = useGetCharactersQuery({
+        keyword,
+        page,
+        sort
     });
 
     function handleChangeSort(e) {
         setSort(e);
-    }
-
-    function handleChangePage(event, value) {
-        setPageNumber(value);
     }
 
     return (
@@ -52,14 +47,13 @@ export default function Characters() {
                         </div>
                     </>
                 )}
-                <Pagination
-                    sx={{ mt: 2 }}
-                    page={pageNumber}
-                    count={data?.pages}
-                    onChange={handleChangePage}
-                    variant="outlined"
-                    shape="rounded"
-                />
+                <div className="mt-3">
+                    <Paginate
+                        pages={data?.pages}
+                        page={data?.page}
+                        keyword={keyword ? keyword : ''}
+                    />
+                </div>
             </Container>
         </>
     );
